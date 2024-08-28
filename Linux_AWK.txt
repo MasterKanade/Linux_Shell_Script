@@ -1,0 +1,63 @@
+AWK is domain specific programming lanaguage.
+
+AWK Syntax:
+
+awk options 'pattern {action}' file_name
+
+options:
+   -F : field separator
+   -v : var = value
+   -f : file
+
+1) awk '{print $2}' employeeData.csv
+==> It will print the second number column data from the csv file.
+
+2) How awk works?
+==>
+      F1   F2 F3   F4 ==> this are called fields / columns
+Row1  This is line one
+Row2  This is line two
+
+awk scans every row of a file and then each word is a field for it.
+
+3) Terms used in AWK:
+
+NR - Number of records or row
+NF - Number of fields
+$0 - it prints everything
+$1,$2 - Field numbers
+
+4) print only the given column
+==> awk '{print $1 $2}' file_name 
+the above will print first two columns of the file
+
+5) print last row or last column
+==> awk '{print $NF}' file_name
+    $NF will print the last column value
+6) search a word
+==> awk '/deva/{print $0}' employeeData.csv
+it will search for the record where name deva meets
+
+7) put a line number in each record of data
+==> awk '{print NR, $0}' file_name
+
+8) print a line number for search data
+==> awk '/deva/{print NR,$0}' file_name
+
+9) print only a particular line number 
+==> awk 'NR == 6 {print $0}' file_name
+
+10) print the range of line (e.g from row 3 to 6)
+==> awk 'NR == 3, NR == 6 {print $0}' file_name
+
+11) get line numbers of empty lines where data is not present.
+==> awk 'NF == 0 {print NR}' file_name
+
+12) search multiple words.
+==> awk '/Robert/Deva/Mithun/{print $0}' file_name
+
+13) Ignore case while searching.
+==> awk 'BEGIN{IGNORECASE=1} /robert/deva/mithun/{print $0}' file_name
+
+14) how to check if given char is present in column
+==> awk '$2 ~ /a/{print $0}' file_name 
